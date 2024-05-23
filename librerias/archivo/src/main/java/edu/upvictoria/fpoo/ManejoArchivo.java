@@ -3,6 +3,7 @@ package edu.upvictoria.fpoo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,12 +15,10 @@ import java.nio.charset.StandardCharsets;
  */
 public class ManejoArchivo {
 
-    public void existeDirectorio(String path) throws IOException{
+    public boolean existeDirectorio(String path){
 
         File file = new File(path);
-        if(!(file.exists())){
-            throw new IOException();
-        }
+        return file.exists();
 
     }
 
@@ -74,26 +73,18 @@ public class ManejoArchivo {
 
     }
 
-    public String fileToStringConSalto(String file){
-
+    public String fileToStringConSalto(String file)throws IOException{
         String cadena = "", agregar;
-        BufferedReader entrada = fileToBuffered(file);
-        try{
-
+        try(BufferedReader entrada = new BufferedReader(new FileReader(file))){
             while ((agregar= entrada.readLine()) != null) {
                 
                 cadena += agregar + "\n";
 
             }
-
         }catch(IOException e){
-
             return null;
-
         }
-
         return cadena;
-
     }
 
     //Creo que esto no sirve

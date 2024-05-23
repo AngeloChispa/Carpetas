@@ -1,0 +1,79 @@
+1. ¿Cuál de las siguientes opciones describe mejor una Interfaz de Línea de Comandos (CLI)?
+
+A) Un entorno gráfico que permite a los usuarios interactuar con el sistema operativo mediante íconos y ventanas.
+
+B) Una aplicación web que facilita la gestión de contenido en línea a través de un navegador.
+
+C) Una interfaz que permite a los usuarios interactuar con el sistema operativo escribiendo comandos de texto.
+
+D) Un software de edición de video que proporciona herramientas para la creación y modificación de contenido multimedia.
+
+2. ¿Cuál de los siguientes comandos se utiliza para abrir el editor de texto Vim en la interfaz de línea de comandos de Linux?
+
+A) open vim
+
+B) start vim
+
+C) vim
+
+D) launch vim
+
+3.- ¿Cuál de los siguientes métodos es comúnmente utilizado para instalar un sistema operativo en una computadora?
+
+A) Descargando una aplicación desde una tienda en línea.
+
+B) Usando un archivo ejecutable en una unidad flash USB o DVD.
+
+C) A través de un correo electrónico con un enlace de descarga.
+
+D) Instalando una actualización desde una aplicación de redes sociales.
+
+4.- ¿Cuáles de los siguientes permisos se pueden asignar a un archivo o directorio en Linux?
+
+A) Lectura (read)
+
+B) Escritura (write)
+
+C) Ejecución (execute)
+
+D) Copia (copy)
+
+
+5.- ¿Cuáles de las siguientes opciones son comandos comunes utilizados en la interfaz de línea de comandos para gestionar archivos y directorios en Linux?
+
+A) ls
+
+B) cd
+
+C) rm
+
+D) edit
+
+6.- ¿Cuáles de los siguientes metacaracteres se utilizan en la interfaz de línea de comandos de Linux para manipular y buscar archivos?
+
+A) =
+
+B) $
+
+C) []
+
+D) @
+
+
+7.- ¿Cuál es el término para un medio de instalación de sistema operativo que se puede arrancar?
+
+8.- ¿Cuál es el comando de Linux utilizado para mover o renombrar archivos y directorios?
+
+9.- ¿Cómo se llama el editor de texto en línea de comandos que es una versión mejorada de vi?
+
+10.- En Linux, los permisos de archivos y directorios solo se aplican a usuarios individuales y no a grupos. ¿Verdadero o Falso?
+
+11.- En la interfaz de línea de comandos, los comandos se ejecutan utilizando solamente combinaciones de teclas, sin necesidad de utilizar el ratón. ¿Verdadero o Falso?
+
+12.- Los metacaracteres en la interfaz de línea de comandos de Linux se utilizan principalmente para realizar cálculos matemáticos. ¿Verdadero o Falso?
+
+13.- ¿Cuántos bits de arquitectura de CPU son necesarios para instalar un sistema operativo de 64 bits en una computadora?
+
+14.- ¿Cuántos archivos se pueden copiar simultáneamente utilizando el comando cp en Linux?
+
+15.- ¿Cuantas lineas muestra por default el comando "head"?
