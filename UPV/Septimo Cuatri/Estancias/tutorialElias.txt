@@ -1,0 +1,101 @@
+Pasos para levantar el proyecto en droplet
+1. Instalar git:
+	sudo apt-get install git
+
+2. Instalar php:
+	sudo apt install php php-curl php-zip php-fpm unzip
+
+3. Instalar nginx y desinstalar apache2:
+	sudo apt install nginx
+	sudo apt remove apache2
+
+3. Instalar composer:
+	php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+	php composer-setup.php --filename=composer
+	sudo mv composer /usr/local/bin/composer
+	php -r "unlink('composer-setup.php');"
+
+4. Instalar docker engine:
+	sudo apt-get install ca-certificates curl
+	sudo install -m 0755 -d /etc/apt/keyrings
+	sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+	sudo chmod a+r /etc/apt/keyrings/docker.asc
+	echo \
+	  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+	  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+	  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	sudo apt-get update
+	 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	sudo docker run hello-world     // este ultimo verifica que docker se ha instalado correctamente
+
+5. Instalar mongosh (mongodb cli):
+	wget -qO- https://www.mongodb.org/static/pgp/server-7.0.asc | sudo tee /etc/apt/trusted.gpg.d/server-7.0.asc
+	echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/7.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-7.0.list
+	sudo apt-get update
+	sudo apt-get install -y mongodb-mongosh
+	mongosh --version
+
+6. Instalar PECL y la extensión de mongodb para php:
+	sudo apt install php-mongodb
+	sudo apt-get install php-pear php-dev
+	sudo pecl install mongodb    // usar las opciones por default
+
+7. Modificar el archivo php.ini. Para saber su ubicación hacer el comando: php --ini
+		nano /etc/php/8.3/cli/php.ini
+	y agregar en la seccion Dynamic Extensions
+		extension=mongodb.so
+
+8. Montar el servidor de mongodb en un contenedor de docker:
+	docker pull mongodb/mongodb-community-server:latest     // este comando descarga la imagen de mongodb para docker
+	docker run --name mongodb -p 27017:27017 -d mongodb/mongodb-community-server:latest    // este comando levanta el contenedor
+	docker container ls     // para confirmar que está corriendo
+	mongosh --port 27017			// para acceder a la base de datos
+
+9. Clonar el repositorio del proyecto en la carpeta var/www y realizar las configuraciones
+	cd /var/www
+	git clone ...
+	cd [nombre del proyecto]
+	composer install
+	php artisan key:generate
+	php artisan storage:link
+	sudo chown -R www-data:www-data storage
+	sudo chown -R www-data:www-data /var/www/[nombre del proyecto]/storage
+	sudo chown -R www-data:www-data bootstrap/cache
+	sudo chmod -R 755 storage
+	sudo chmod -R 775 /var/www/[nombre del proyecto]/storage
+	cp .env.example .env
+	php artisan migrate
+
+10. Configurar nginx
+		sudo nano /etc/nginx/sites-available/[nombre del proyecto]
+	y adjuntar a ese archivo lo siguiente
+
+		server {
+		    listen 80;
+		    server_name [IP DEL DROPLET];
+
+		    root /var/www/[NOMBRE DEL PROYECTO/public;
+		    index index.php index.html index.htm;
+
+		    location / {
+		        try_files $uri $uri/ /index.php?$query_string;
+		    }
+
+		    location ~ \.php$ {
+		        include snippets/fastcgi-php.conf;
+		        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock; ### CHECAR QUE LA VERSION DE PHP SEA LA CORRECTA
+		        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		        include fastcgi_params;
+		    }
+
+		    location ~ /\.ht {
+		        deny all;
+		    }
+		}
+
+	Después hay que habilitar el sitio:
+		sudo ln -s /etc/nginx/sites-available/[NOMBRE DEL PROYECTO] /etc/nginx/sites-enabled/
+		sudo systemctl restart nginx
+		sudo systemctl start php8.3-fpm //// IGUAL CHECAR LA VERSION DE PHP
+
+11. Ingresar a la ip del droplet

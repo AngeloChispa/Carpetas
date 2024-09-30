@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla con Imagen y Tamaño Fijo</title>
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .flex-container {
+            display: flex;
+
+        }
+
+        .second-flex-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .date {
+            padding: 10px;
+            padding-top: 15px;
+            margin-right: 10px;
+            width: 210px;
+            font-size: 13.5px;
+        }
+
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+        }
+
+        .folio {
+            padding-left: 10px;
+            padding-top: 15px;
+            width: 210px;
+            font-size: 13.5px;
+        }
+
+        .date p {
+            margin: 0;
+        }
+
+        .contenido {
+            margin-left: 120px;
+            padding: 10px;
+        }
+
+        .sender {
+            flex-grow: 1;
+        }
+
+        .sender h2 {
+            margin-top: 7px;
+            margin-bottom: 1px;
+        }
+
+        .sender p {
+            margin-top: 0px;
+        }
+
+        .container {
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        table {
+            width: 80%;
+            max-width: 600px;
+            margin: 0 auto;
+            
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 10px;
+            width: 350px;
+            height: 50px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            /* Muestra "..." si el texto es demasiado largo */
+        }
+
+        tr:first-child td {
+            height: 20px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .image-cell {
+            text-align: center;
+            /* Centrar la imagen horizontalmente */
+            vertical-align: middle;
+            /* Centrar la imagen verticalmente */
+            width: 150px;
+            /* Ancho fijo para la celda de imagen */
+            height: 100px;
+            min-height: 150px;
+        }
+
+        /* Estilo para la imagen */
+        .image-cell img {
+            max-height: 100%;
+            /* La imagen no excederá la altura de la celda */
+            max-width: 100%;
+            /* La imagen no excederá el ancho de la celda */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="flex-container">
+        <div class="date">
+            <p>Ciudad Victoria Tamaulipas a</p>
+            <p>Miercoles 12, de junio del 2024</p>
+        </div>
+        <div class="sender">
+            <h2>Ivan Cabrera</h2>
+            <p>Subsecretaria</p>
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="folio">
+            <p>Num. Oficio</p>
+            <p>ITCA/DG/000657/2024</p>
+        </div>
+        <div class="contenido">
+            <p>Lorem ipsum odor amet, consectetuer adipiscing elit. Penatibus hendrerit metus consequat sit cubilia
+                nibh. Condimentum posuere tellus tempus augue nascetur ante ad. Felis sociosqu quis maecenas cursus
+                integer integer aliquet libero blandit. Porta sem interdum accumsan massa vel enim iaculis tellus. Nec
+                vestibulum tellus at felis mauris habitasse ipsum malesuada consequat. Vivamus quis in proin lacinia
+                parturient auctor cubilia cras magnis. Aenean potenti scelerisque eget congue iaculis nostra vitae
+                feugiat.
+
+                Gravida sem sollicitudin finibus massa quam senectus. Libero curabitur integer auctor curae eu magnis
+                litora. Quam primis dapibus justo iaculis aptent aenean ullamcorper ex efficitur. Nostra morbi vitae
+                habitasse eros vehicula odio molestie congue vestibulum. Eu maecenas porttitor rutrum mus urna
+                curabitur. Metus donec vehicula natoque felis ornare. Montes scelerisque consequat porta, fringilla
+                adipiscing morbi quam.
+
+                Feugiat venenatis ac eu risus molestie mus. Pulvinar nam vivamus taciti morbi amet tempus ridiculus
+                elit. Sapien habitant imperdiet risus tortor tempor eleifend pulvinar dignissim. Consequat mus aliquam
+                dolor ultrices condimentum. Metus mauris laoreet turpis volutpat mattis facilisis hendrerit. Neque
+                tellus nec auctor turpis tempus donec sit. Justo non nostra dis libero dolor, efficitur blandit metus.
+
+                Semper aenean parturient cras scelerisque dignissim; orci blandit ultrices. Ligula aenean etiam pretium
+                primis donec vel in blandit nunc. Potenti pharetra efficitur condimentum gravida ridiculus elit inceptos
+                turpis. Fames lobortis bibendum duis urna sagittis proin sem dapibus. Finibus at a fermentum; sodales
+                aenean neque. Tortor finibus viverra pellentesque amet viverra egestas per magnis.</p>
+        </div>
+    </div>
+    <div class="center">
+        <p>Atentamente</p>
+        <div class="second-flex-container">
+            <p>Lic.</p>
+            <p>Oaxaca</p>
+        </div>
+    </div>
+    <div class="container">
+        <table>
+            <tr>
+                <td colspan="2">Firma Digital</td>
+            </tr>
+            <tr>
+                <td rowspan="2" class="image-cell">
+                    <img src="ruta_de_tu_imagen.jpg" alt="QR" />
+                </td>
+                <td>Cadena Original</td>
+            </tr>
+            <tr>
+                <td>Sello CFDI</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

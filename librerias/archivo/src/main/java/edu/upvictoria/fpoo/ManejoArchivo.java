@@ -3,6 +3,7 @@ package edu.upvictoria.fpoo;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,13 +23,19 @@ public class ManejoArchivo {
 
     }
 
-    public void crearArchivo(String path, String nombreArchivo) throws IOException{
-        if(nombreArchivo.indexOf(File.separator) != 0){
+    public void crearArchivo(String path, String nombreArchivo) throws IOException {
+        if (!nombreArchivo.startsWith(File.separator)) {
             nombreArchivo = File.separator + nombreArchivo;
         }
+        
         File file = new File(path + nombreArchivo);
-        if(!(file.createNewFile())){
-            throw new IOException();
+        
+        if (file.exists()) {
+            throw new IOException("El archivo ya existe: " + file.getAbsolutePath());
+        }
+        
+        if (!file.createNewFile()) {
+            throw new IOException("No se pudo crear el archivo: " + file.getAbsolutePath());
         }
     }
 
@@ -82,12 +89,25 @@ public class ManejoArchivo {
 
             }
         }catch(IOException e){
-            return null;
+            System.out.println("No se encontro el archivo");
+            throw new IOException();
         }
         return cadena;
     }
 
-    //Creo que esto no sirve
+    public String primeraLinea(String file){
+        String cadena = "";
+        try(BufferedReader entrada = new BufferedReader(new FileReader(file));){
+            cadena = entrada.readLine();
+        }catch(FileNotFoundException e){
+            System.out.println("No se encontro el archivo");
+        }catch(IOException e){
+            e.getStackTrace();
+        }
+        return cadena;
+    }   
+
+   
     public void addToFile(String file, String cadena) {
         try {
             BufferedWriter agregar = new BufferedWriter(new FileWriter(file, true));
@@ -99,5 +119,18 @@ public class ManejoArchivo {
             System.out.println("====================================\n");
         }
     }
+
+    public void overwriteFile(String file, String cadena) {
+        try {
+            BufferedWriter escritor = new BufferedWriter(new FileWriter(file));
+            escritor.write(cadena);
+            escritor.close();
+        } catch (IOException e) {
+            System.out.println("\n====================================");
+            System.out.println("Algo salió mal al momento de reescribir");
+            System.out.println("====================================\n");
+        }
+    }
+    
 
 }
