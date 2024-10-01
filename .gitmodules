@@ -1,3 +1,3 @@
 [submodule "syllabus"]
-	path = /home/yisuscena/Escritorio/Carpetas/UPV/Sexto Cuatri/POO/Unidad 1/Syllabus-POO-ITI2018
+	path = "UPV/Sexto Cuatri/POO/Unidad 1/Syllabus-POO-ITI2018"
 	url = https://github.com/UPV-Programacion-Orientada-a-Objetos/Syllabus-POO-ITI2018.git
